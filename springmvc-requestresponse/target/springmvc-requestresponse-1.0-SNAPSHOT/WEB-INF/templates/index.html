@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+<h1>首页</h1>
+<a th:href="@{/responsePrint}">response print</a><br/>
+<a th:href="@{/responseBody}">responseBody</a><br/>
+<a th:href="@{/testRestController}">testRestController</a><br/>
+<div id="app">
+    <a th:href="@{/testAxios}" @click="testAxios">测试 Axios</a>
+</div>
+<div>
+    <a th:href="@{/testDownload}">test download</a>
+</div>
+<div>
+    <a th:href="@{/upload}">upload</a>
+</div>
+<div>
+    <a th:href="@{/testException}">Test Exception</a>
+</div>
+
+<script type="text/javascript" th:src="@{/static/js/vue.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/axios.min.js}"></script>
+<script type="text/javascript">
+    new Vue({
+        el:"#app",
+        methods:{
+            testAxios:function (event) {
+                axios({
+                    method:"post",
+                    url:event.target.href,
+                    params:{
+                        username:"admin",
+                        password:"123456"
+                    }
+                }).then(function (response) {
+                    alert(response.data);
+                });
+                event.preventDefault();
+            }
+        }
+    });
+</script>
+</body>
+</html>
